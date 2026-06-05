@@ -2,8 +2,10 @@ name: Daily Stock Scanner
 
 on:
   schedule:
-    - cron: '0 21 * * 1-5'  # 9pm UTC = 5am HKT weekdays (after US market close)
-  workflow_dispatch:          # Allow manual trigger
+    - cron: '0 4 * * 1-5'    # HKT 12:00 noon (midday check)
+    - cron: '30 13 * * 1-5'  # HKT 21:30 (US market open 9:30am ET)
+    - cron: '0 21 * * 1-5'   # HKT 05:00 (US market close)
+  workflow_dispatch:           # Allow manual trigger
 
 jobs:
   scan:
