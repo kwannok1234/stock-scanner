@@ -1,0 +1,4 @@
+# Add your holdings here: TICKER,STOP_LOSS_PRICE
+# Example:
+# NVDA,480.00
+# TSLA,200.00
