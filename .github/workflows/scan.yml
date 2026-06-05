@@ -1,0 +1,26 @@
+name: Daily Stock Scanner
+
+on:
+  schedule:
+    - cron: '0 21 * * 1-5'  # 9pm UTC = 5am HKT weekdays (after US market close)
+  workflow_dispatch:          # Allow manual trigger
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install yfinance requests pandas
+
+      - name: Run stock scanner
+        env:
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          CHAT_ID: ${{ secrets.CHAT_ID }}
+        run: python scan.py
